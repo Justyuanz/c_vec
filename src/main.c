@@ -8,10 +8,13 @@ int	main(void)
 	t_vec t2;
 	int     base[] = {1, 2, 3, 4, 5};
 	const char	*src = "src";
-	char	dst[10];
+	int	dst[5];
 
 printf("==============================FT_MEMCPY==============================\n");
-	printf("%s", (char *)ft_memcpy(dst, src, 3));
+	ft_memcpy(dst, base, 5*sizeof(int));
+	for (int i = 0; i < 5; i++)
+		printf("%d-",dst[i]);
+	printf("\n");
 	printf("test_ft_memcpy success!\n");
 printf("==============================ft_MEMMOVE==============================\n");
 	printf("%s", (char *)ft_memmove(dst, src, 3));
@@ -36,7 +39,7 @@ printf("==============================VEC_FREE==============================\n")
 printf("==============================VEC_FROM==============================\n");
     assert(vec_from(&t1, base, 5, sizeof(int)) > 0);
 	for (size_t i = 0; i < 5; i++)
-		printf("%d-",t1.memory[i]);
+		printf("%d-", t1.memory[i]);
 	printf("\n");
 	for (size_t j = 0; j < 5; j++)
 		printf("%d-",base[j]);
@@ -47,7 +50,7 @@ printf("==============================VEC_FROM==============================\n")
 printf("==============================VEC_COPY==============================\n");
 	assert(vec_from(&t1, base, 5, sizeof(int)) > 0);
 	for (size_t i = 0; i < 5; i++)
-		printf("%d-",t2.memory[i]);
+		printf("%d-",t1.memory[i]);
 	printf("\n");
     assert(vec_new(&t2, 5, sizeof(int)) > 0);
 	for (size_t i = 0; i < 5; i++)
@@ -57,7 +60,10 @@ printf("==============================VEC_COPY==============================\n")
 	for (size_t i = 0; i < 5; i++)
 		printf("%d-",t2.memory[i]);
 	printf("\n");
-    //assert(memcmp(t2.memory, base, sizeof(base)) == 0);
+	for (size_t i = 0; i < 5; i++)
+		printf("%d-",t2.memory[i]);
+	printf("\n");
+    assert(memcmp(t2.memory, base, sizeof(base)) == 0);
     vec_free(&t1);
     vec_free(&t2);
     printf("test_vec_copy successful!\n");

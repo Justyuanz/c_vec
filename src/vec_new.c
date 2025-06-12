@@ -19,4 +19,3 @@ int	vec_new(t_vec *dst, size_t init_len, size_t elem_size)
 	}
 	return (1);
 	}
-

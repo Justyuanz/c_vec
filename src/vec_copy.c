@@ -6,7 +6,7 @@ int vec_copy(t_vec *dst, t_vec *src)
 		return (-1);
 	dst->len = src->len;
 	dst->elem_size = src->elem_size;
-	dst->alloc_size = dst->elem_size * dst->elem_size;
+	dst->alloc_size = dst->len * dst->elem_size;
 	ft_memcpy(dst->memory, src->memory, dst->alloc_size);
 	return (1);
 }
