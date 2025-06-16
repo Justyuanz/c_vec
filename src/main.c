@@ -2,6 +2,20 @@
 #include <stdio.h>
 #include <string.h>
 #include "vec.h"
+
+
+void test_vec_resize()
+{
+	t_vec	t1;
+	int		base[] = {1, 2, 3, 4, 5};
+
+	assert(vec_from(&t1, base, 5, sizeof(int)) > 0);
+	assert(vec_resize(&t1, 100) > 0);
+	assert(memcmp(t1.memory, base, sizeof(base)) == 0);
+	vec_free(&t1);
+	printf("test_vec_resize successful!\n");
+}
+
 int	main(void)
 {
 	t_vec t1;
@@ -67,5 +81,7 @@ printf("==============================VEC_COPY==============================\n")
     vec_free(&t1);
     vec_free(&t2);
     printf("test_vec_copy successful!\n");
+printf("==============================VEC_RESIZE==============================\n");
+	test_vec_resize();
 }
 
