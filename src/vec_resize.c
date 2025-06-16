@@ -6,9 +6,8 @@ copying the old contents over to the new allocation.*/
 
 int	vec_resize(t_vec *src, size_t target_size)
 {
-	t_vec	*dst;
+	t_vec	dst;
 
-	dst = NULL;
 	if(!src)
 		return (-1);
 	if(!src->memory)
@@ -18,17 +17,17 @@ int	vec_resize(t_vec *src, size_t target_size)
 	}
 	else
 	{
-		if (vec_new(dst,target_size,src->alloc_size) == -1)
+		if (vec_new(&dst,target_size,src->alloc_size) == -1)
 		{
 			return (-1);
 		}
 		else
 		{
-			ft_memcpy(dst->memory, src->memory, target_size);
-			dst->alloc_size = target_size;
-			dst->elem_size = src->elem_size;
+			ft_memcpy(dst.memory, src->memory, target_size);
+			dst.alloc_size = target_size;
+			dst.elem_size = src->elem_size;
 			vec_free(src);
-			dst = src;
+			src = &dst;
 		}
 	}
 	return (1);
