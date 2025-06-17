@@ -1,33 +1,27 @@
 #include "vec.h"
 
-/*Create a function vec_resize which will take in a target_size parameter
-and either shrink (destructively) or grow the vector to the target size,
-copying the old contents over to the new allocation.*/
-
-int	vec_resize(t_vec *src, size_t target_size)
+int	vec_resize(t_vec *src, size_t target_len)
 {
-	t_vec	dst;
+	t_vec	tmp;
 
 	if(!src)
 		return (-1);
 	if(!src->memory)
 	{
-		src->alloc_size = target_size;
-		return (vec_new(src, src->alloc_size, src->elem_size));
+		return (vec_new(src, target_len, src->elem_size));
 	}
 	else
 	{
-		if (vec_new(&dst,target_size,src->alloc_size) == -1)
+		if (vec_new(&tmp, target_len, src->elem_size) == -1)
 		{
 			return (-1);
 		}
 		else
 		{
-			ft_memcpy(dst.memory, src->memory, target_size);
-			dst.alloc_size = target_size;
-			dst.elem_size = src->elem_size;
+			ft_memcpy(tmp.memory, src->memory, src->alloc_size);
+			tmp.len = src->len;
 			vec_free(src);
-			src = &dst;
+			*src = tmp;
 		}
 	}
 	return (1);

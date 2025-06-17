@@ -16,6 +16,21 @@ void test_vec_resize()
 	printf("test_vec_resize successful!\n");
 }
 
+void test_vec_push()
+{
+	t_vec	t1;
+	int		base[] = {1, 2, 3, 4, 5};
+	int		expect[] = {2, 4};
+
+	assert(vec_new(&t1, 1, sizeof(int)) > 0);
+	vec_push(&t1, &base[1]);
+	vec_push(&t1, &base[3]);
+	assert(memcmp(t1.memory, expect, sizeof(expect)) == 0);
+	vec_free(&t1);
+	printf("test_vec_push successful!\n");
+}
+
+
 int	main(void)
 {
 	t_vec t1;
@@ -68,7 +83,7 @@ printf("==============================VEC_COPY==============================\n")
 	printf("\n");
     assert(vec_new(&t2, 5, sizeof(int)) > 0);
 	for (size_t i = 0; i < 5; i++)
-		printf("%d-",t2.memory[i]);
+	//	printf("%d-",t2.memory[i]);
 	printf("\n");
     assert(vec_copy(&t2, &t1) > 0);
 	for (size_t i = 0; i < 5; i++)
@@ -83,5 +98,7 @@ printf("==============================VEC_COPY==============================\n")
     printf("test_vec_copy successful!\n");
 printf("==============================VEC_RESIZE==============================\n");
 	test_vec_resize();
+printf("==============================VEC_PUSH==============================\n");
+	test_vec_push();
 }
 
