@@ -14,7 +14,7 @@ int vec_push(t_vec *dst, void *element)
 		if (vec_resize(dst, dst->len * 2) == -1)
 			return (-1);
 	}
-	ft_memcpy(dst->memory + dst->len * dst->elem_size, element, dst->elem_size);
+	ft_memcpy(&dst->memory[dst->len * dst->elem_size], element, dst->elem_size);
 	dst->len += 1;
 	return (1);
 }

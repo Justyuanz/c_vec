@@ -24,7 +24,12 @@ void test_vec_push()
 
 	assert(vec_new(&t1, 1, sizeof(int)) > 0);
 	vec_push(&t1, &base[1]);
+	printf("%d\n",t1.memory[0]);
+	printf("%d\n",t1.memory[1]);
 	vec_push(&t1, &base[3]);
+	printf("%d\n",t1.memory[0]);
+	printf("%d\n",t1.memory[1]);
+	//printf("%lu\n",  sizeof(expect));
 	assert(memcmp(t1.memory, expect, sizeof(expect)) == 0);
 	vec_free(&t1);
 	printf("test_vec_push successful!\n");
