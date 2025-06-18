@@ -1,0 +1,6 @@
+#include "vec.h"
+
+int vec_pop(int *dst, t_vec *src)
+{
+	
+}

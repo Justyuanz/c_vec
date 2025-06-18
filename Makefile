@@ -10,8 +10,8 @@ OBJDIR = obj
 # === Source Files ===
 SRCS = $(addprefix $(SRCDIR)/,\
 	main.c \
-	ft_memcpy.c \
-	ft_memmove.c \
+	ft_intmemcpy.c \
+	ft_intmemmove.c \
 	vec_free.c \
 	vec_from.c \
 	vec_new.c \

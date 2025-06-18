@@ -1,19 +1,19 @@
 #include "vec.h"
 
-int vec_from(t_vec *dst, void *src, size_t len, size_t elem_size)
+int vec_from(t_vec *dst, int *src, size_t len)
 {
-	if(!src || elem_size == 0)
+	if(!src)
 		return (-1);
 	int	i;
 
 	i = 0;
-	if (vec_new(dst, len, elem_size) < 0)
+	if (vec_new(dst, len) < 0)
 	{
 		return (-1);
 	}
 	else
 	{
-		ft_memcpy(dst->memory, src, dst->alloc_size);
+		ft_intmemcpy(dst->memory, src, dst->capacity);
 		if (!dst->memory)
 			return (-1);
 	}
