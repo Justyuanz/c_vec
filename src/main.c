@@ -41,11 +41,8 @@ void test_vec_pop()
 
 	assert(vec_new(&t1, 1) > 0);
 	vec_push(&t1, &base[1]);
-	printf("%d\n",t1.memory[0]);
 	vec_push(&t1, &base[3]);
-	printf("%d\n", t1.memory[1]);
 	vec_pop(&expect, &t1);
-	printf("%d\n", expect);
 	assert(expect == 4);
 	vec_pop(&expect, &t1);
 	assert(expect == 2);
@@ -70,6 +67,21 @@ void test_vec_get()
 	assert(vec_get(&t1, 2) == NULL);
 	vec_free(&t1);
 	printf("test_vec_get successful!\n");
+}
+void test_vec_insert()
+{
+	t_vec	t1;
+	int		base[] = {1, 2, 3, 4, 5};
+	int		insert[] = {42, 666, 7};
+	int		expect[] = {1, 42, 2, 3, 666, 4, 5, 7};
+
+	assert(vec_from(&t1, base, 5) > 0);
+	vec_insert(&t1, &insert[0], 1);
+	vec_insert(&t1, &insert[1], 4);
+	vec_insert(&t1, &insert[2], 7);
+	assert(memcmp(t1.memory, expect, sizeof(expect)) == 0);
+	vec_free(&t1);
+	printf("test_vec_insert successful!\n");
 }
 
 int	main(void)
@@ -143,5 +155,7 @@ int	main(void)
 	test_vec_pop();
 	printf("==============================VEC_GET==============================\n");
 	test_vec_get();
+	printf("==============================VEC_INSERT==============================\n");
+	test_vec_insert();
 }
 
