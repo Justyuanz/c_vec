@@ -77,11 +77,66 @@ void test_vec_insert()
 
 	assert(vec_from(&t1, base, 5) > 0);
 	vec_insert(&t1, &insert[0], 1);
-	vec_insert(&t1, &insert[1], 4);
+	vec_insert(&t1, &insert[1], 4); 
 	vec_insert(&t1, &insert[2], 7);
 	assert(memcmp(t1.memory, expect, sizeof(expect)) == 0);
 	vec_free(&t1);
 	printf("test_vec_insert successful!\n");
+}
+void test_vec_remove()
+{
+	t_vec	t1;
+	int		base[] = {1, 2, 3, 4, 5};
+	int		insert[] = {42, 666, 7};
+
+	assert(vec_from(&t1, base, 5) > 0);
+	vec_insert(&t1, &insert[0], 1);
+	vec_insert(&t1, &insert[1], 4);
+	vec_insert(&t1, &insert[2], 7);
+	vec_remove(&t1, 1);
+	vec_remove(&t1, 3);
+	vec_remove(&t1, 5);
+	assert(memcmp(t1.memory, base, sizeof(base)) == 0);
+	vec_free(&t1);
+	printf("test_vec_remove successful!\n");
+}
+
+void test_vec_append()
+{
+	t_vec	t1;
+	t_vec	t2;
+	int		base1[] = {1, 2, 3};
+	int		base2[] = {4, 5, 6};
+	int		expect[] = {1, 2, 3, 4, 5, 6};
+
+	assert(vec_from(&t1, base1, 3) > 0);
+	assert(vec_from(&t2, base2, 3) > 0);
+	assert(vec_append(&t1, &t2) > 0);
+	assert(memcmp(t1.memory, expect, sizeof(expect)) == 0);
+	vec_free(&t1);
+	vec_free(&t2);
+	printf("test_vec_append successful!\n");
+}
+void test_vec_prepend()
+{
+	t_vec	t1;
+	t_vec	t2;
+	int		base1[] = {1, 2, 3};
+	int		base2[] = {4, 5, 6};
+	int		expect[] = {4, 5, 6, 1, 2, 3};
+
+	assert(vec_from(&t1, base1, 3) > 0);
+	assert(vec_from(&t2, base2, 3) > 0);
+	assert(vec_prepend(&t1, &t2) > 0);
+	for (size_t i = 0; i < t1.len; i++)
+	{
+		printf("%d ", t1.memory[i]);
+	}
+	
+	assert(memcmp(t1.memory, expect, sizeof(expect)) == 0);
+	vec_free(&t1);
+	vec_free(&t2);
+	printf("test_vec_prepend successful!\n");
 }
 
 int	main(void)
@@ -157,5 +212,11 @@ int	main(void)
 	test_vec_get();
 	printf("==============================VEC_INSERT==============================\n");
 	test_vec_insert();
+	printf("==============================VEC_REMOVE==============================\n");
+	test_vec_remove();
+	printf("==============================VEC_APPEND==============================\n");
+	test_vec_append();
+	printf("==============================VEC_PREPEND==============================\n");
+	test_vec_prepend();
 }
 
