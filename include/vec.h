@@ -17,6 +17,8 @@ int		vec_from(t_vec *dst, int *src, size_t len);
 int		vec_copy(t_vec *dst, t_vec *src);
 int		vec_resize(t_vec *src, size_t target_size);
 int		vec_push(t_vec *dst, int *element);
+int 	vec_pop(int *dst, t_vec *src);
+void 	*vec_get(t_vec *src, size_t index);
 void	*ft_intmemcpy(int * dst, const int * src, size_t n);
 void	*ft_intmemmove(int *dst, const int *src, size_t n);
 void	vec_free(t_vec *src);
